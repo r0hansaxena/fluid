@@ -134,6 +134,11 @@ var _ = Describe("DeleteRoleBinding", func() {
 			err := DeleteRoleBinding(fakeClient, "notExist", namespace)
 			Expect(err).NotTo(HaveOccurred())
 		})
+
+		It("should not return an error when role binding exists in another namespace", func() {
+			err := DeleteRoleBinding(fakeClient, "test", "another-namespace")
+			Expect(err).NotTo(HaveOccurred())
+		})
 	})
 
 	Context("when role binding exists", func() {
